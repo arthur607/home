@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arthur Garcia</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0a0a0a;
+      color: #e0e0e0;
+      font-family: 'Courier New', monospace;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .gate {
+      text-align: center;
+      opacity: 1;
+      transition: opacity 0.6s ease;
+    }
+    .gate.hidden { opacity: 0; pointer-events: none; }
+    .enter { font-size: 1.4rem; letter-spacing: 0.15em; animation: pulse 2s infinite; }
+    .symbols { font-size: 1.8rem; margin: 1rem 0; color: #aaa; }
+    .content {
+      display: none;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+    .content.show { display: block; opacity: 1; }
+    h1 { font-size: 2.5rem; font-weight: 300; letter-spacing: 0.2em; margin-bottom: 0.5rem; }
+    .meta { font-size: 0.85rem; color: #666; margin: 1.5rem 0; }
+    .links { margin-top: 2rem; }
+    .links a {
+      color: #ccc;
+      text-decoration: none;
+      margin: 0 1rem;
+      font-size: 0.95rem;
+      border-bottom: 1px solid transparent;
+      transition: all 0.2s;
+    }
+    .links a:hover { color: #fff; border-bottom-color: #fff; }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="gate" id="gate">
+    <div class="enter">click to enter...</div>
+    <div class="symbols">◆ ♡ ◆</div>
+    <div class="meta">UID 150ML &middot; Profile Views 1</div>
+  </div>
+
+  <div class="content" id="content">
+    <h1>ARTHUR GARCIA</h1>
+    <div class="symbols">◆ ♡ ◆</div>
+    <div class="meta">Java Developer &middot; IBM</div>
+    <div class="links">
+      <a href="https://x.com/arthur150ml" target="_blank">x</a>
+      <a href="https://github.com/arthur607" target="_blank">github</a>
+      <a href="https://www.linkedin.com/in/arthurrodriguesgarcia/" target="_blank">linkedin</a>
+    </div>
+    <div class="meta" style="margin-top: 3rem;">im pissed off</div>
+  </div>
+
+  <script>
+    const gate = document.getElementById('gate');
+    const content = document.getElementById('content');
+    document.body.addEventListener('click', () => {
+      gate.classList.add('hidden');
+      setTimeout(() => {
+        content.classList.add('show');
+      }, 400);
+    });
+  </script>
+</body>
+</html>
