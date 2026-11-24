@@ -4,12 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Arthur Garcia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      background: #0a0a0a;
-      color: #e0e0e0;
-      font-family: 'Courier New', monospace;
+      background: #000;
+      color: #fff;
+      font-family: 'Inter', system-ui, sans-serif;
       height: 100vh;
       display: flex;
       align-items: center;
@@ -17,66 +19,108 @@
       overflow: hidden;
       cursor: pointer;
     }
-    .gate {
+    .wrapper {
       text-align: center;
-      opacity: 1;
-      transition: opacity 0.6s ease;
+      padding: 3rem 2.5rem;
+      border-radius: 24px;
+      background: rgba(20, 20, 20, 0.6);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 0 40px rgba(255,255,255,0.04);
+      max-width: 420px;
+      width: 90%;
     }
-    .gate.hidden { opacity: 0; pointer-events: none; }
-    .enter { font-size: 1.4rem; letter-spacing: 0.15em; animation: pulse 2s infinite; }
-    .symbols { font-size: 1.8rem; margin: 1rem 0; color: #aaa; }
+    .gate { transition: opacity 0.5s ease; }
+    .gate.hidden { opacity: 0; pointer-events: none; position: absolute; }
+    .enter {
+      font-size: 1.1rem;
+      letter-spacing: 0.25em;
+      text-transform: lowercase;
+      opacity: 0.7;
+      animation: pulse 2.2s ease-in-out infinite;
+    }
+    .symbols {
+      font-size: 1.4rem;
+      margin: 1.2rem 0;
+      letter-spacing: 0.3em;
+      opacity: 0.5;
+    }
+    .meta {
+      font-size: 0.75rem;
+      color: #666;
+      letter-spacing: 0.1em;
+      margin-top: 1rem;
+    }
     .content {
       display: none;
-      text-align: center;
       opacity: 0;
-      transition: opacity 0.8s ease;
+      transition: opacity 0.7s ease;
     }
     .content.show { display: block; opacity: 1; }
-    h1 { font-size: 2.5rem; font-weight: 300; letter-spacing: 0.2em; margin-bottom: 0.5rem; }
-    .meta { font-size: 0.85rem; color: #666; margin: 1.5rem 0; }
-    .links { margin-top: 2rem; }
-    .links a {
-      color: #ccc;
-      text-decoration: none;
-      margin: 0 1rem;
-      font-size: 0.95rem;
-      border-bottom: 1px solid transparent;
-      transition: all 0.2s;
+    h1 {
+      font-size: 1.8rem;
+      font-weight: 400;
+      letter-spacing: 0.35em;
+      margin-bottom: 0.4rem;
     }
-    .links a:hover { color: #fff; border-bottom-color: #fff; }
+    .subtitle {
+      font-size: 0.85rem;
+      color: #aaa;
+      margin: 0.8rem 0 1.8rem;
+    }
+    .links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .links a {
+      color: #ddd;
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: lowercase;
+      transition: color 0.2s, text-shadow 0.2s;
+    }
+    .links a:hover {
+      color: #fff;
+      text-shadow: 0 0 8px rgba(255,255,255,0.4);
+    }
     @keyframes pulse {
-      0%, 100% { opacity: 0.6; }
-      50% { opacity: 1; }
+      0%, 100% { opacity: 0.45; }
+      50% { opacity: 0.9; }
     }
   </style>
 </head>
 <body>
-  <div class="gate" id="gate">
-    <div class="enter">click to enter...</div>
-    <div class="symbols">◆ ♡ ◆</div>
-    <div class="meta">UID 150ML &middot; Profile Views 1</div>
-  </div>
-
-  <div class="content" id="content">
-    <h1>ARTHUR GARCIA</h1>
-    <div class="symbols">◆ ♡ ◆</div>
-    <div class="meta">Java Developer &middot; IBM</div>
-    <div class="links">
-      <a href="https://x.com/arthur150ml" target="_blank">x</a>
-      <a href="https://github.com/arthur607" target="_blank">github</a>
-      <a href="https://www.linkedin.com/in/arthurrodriguesgarcia/" target="_blank">linkedin</a>
+  <div class="wrapper">
+    <div class="gate" id="gate">
+      <div class="enter">click to enter...</div>
+      <div class="symbols">◆ ♡ ◆</div>
+      <div class="meta">UID 150ML · 1 views</div>
     </div>
-    <div class="meta" style="margin-top: 3rem;">im pissed off</div>
+
+    <div class="content" id="content">
+      <h1>ARTHUR GARCIA</h1>
+      <div class="symbols">◆ ♡ ◆</div>
+      <div class="subtitle">Java Developer · IBM</div>
+      <div class="links">
+        <a href="https://x.com/arthur150ml" target="_blank">x</a>
+        <a href="https://github.com/arthur607" target="_blank">github</a>
+        <a href="https://www.linkedin.com/in/arthurrodriguesgarcia/" target="_blank">linkedin</a>
+      </div>
+      <div class="meta" style="margin-top: 2.5rem;">im pissed off</div>
+    </div>
   </div>
 
   <script>
     const gate = document.getElementById('gate');
     const content = document.getElementById('content');
     document.body.addEventListener('click', () => {
-      gate.classList.add('hidden');
-      setTimeout(() => {
-        content.classList.add('show');
-      }, 400);
+      if (!content.classList.contains('show')) {
+        gate.classList.add('hidden');
+        setTimeout(() => content.classList.add('show'), 300);
+      }
     });
   </script>
 </body>
